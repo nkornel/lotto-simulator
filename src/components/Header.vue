@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-start bg-gradient-to-r from-lotto-green to-yellow-200 py-5 items-baseline">
+    <div class="flex justify-start bg-gradient-to-r from-lotto-green to-lotto-yellow py-5 items-baseline">
         <button class="text-white mx-5 text-2xl">
             <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1_2035)">
