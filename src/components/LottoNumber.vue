@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { store } from '../store.js';
 
 const emits = defineEmits(['update:modelValue']);

@@ -8,11 +8,11 @@
 
         <NumberRow title="Winning numbers:" :automatic="true" v-model="store.winning_numbers"/>
 
-        <NumberRow title="My numbers:" v-model="store.my_numbers" />
+        <NumberRow title="My numbers:" v-model="store.my_numbers" @numbers-updated="startPlaying" />
 
-        <Randomizer v-model="store.randomizing" />
+        <Randomizer @toggled="toggleMyNumbers" />
 
-        <VelocityRow />
+        <VelocityRow v-model="store.speed" />
     </div>
 </template>
 
@@ -22,22 +22,40 @@ import NumberRow from './NumberRow.vue';
 import ResultCard from './ResultCard.vue';
 import Randomizer from './Randomizer.vue';
 import VelocityRow from './VelocityRow.vue';
-import {onMounted, ref} from 'vue';
+import {onMounted} from 'vue';
 import {store} from '../store.js';
 
 onMounted(() => {
     for(let i = 0; i < 5; i++) {  
-        createWinningLottoNumbers();      
+        createLottoNumbers(store.winning_numbers); 
         store.my_numbers.push(0);
     }
 });
 
-function createWinningLottoNumbers() {
+function toggleMyNumbers() {
+    store.my_numbers = [];
+
+    if (store.randomizing) {
+        for(let i = 0; i < 5; i++) {  
+            createLottoNumbers(store.my_numbers);
+        }
+    } else {
+        for(let i = 0; i < 5; i++) {    
+            store.my_numbers.push(0);
+        }
+    }
+}
+
+function startPlaying() {
+
+}
+
+function createLottoNumbers(numbersArray) {
     let newNumber = getRandomInt(1,90);
 
-    if (!store.winning_numbers.includes(newNumber) && store.winning_numbers.length !== 5) {
-        store.winning_numbers.push(newNumber);
-    } else if (items.value.length !== 5) {
+    if (!numbersArray.includes(newNumber) && numbersArray.length !== 5) {
+        numbersArray.push(newNumber);
+    } else if (numbersArray.length !== 5) {
         createLottoNumbers();
     } else {
         return;

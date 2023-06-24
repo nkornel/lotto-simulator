@@ -41,10 +41,12 @@
 </template>
 
 <script setup>
+import {store} from '../store.js';
 defineProps(['modelValue'])
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['toggled']);
 
 function checkboxToggle(ev) {
-    emit('update:modelValue', ev.target.checked);
+    store.randomizing = ev.target.checked;
+    emit('toggled', ev.target.checked);
 }
 </script>

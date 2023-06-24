@@ -3,7 +3,15 @@
         <label class="mb-4">Speed</label>
         <div class="w-full">
             <div class="h-1 w-full bg-lotto-gray relative">
-                <input ref="velocityRange" v-on:input="handleChange" type="range" min="1" max="100" v-model="velocity" class="absolute slider w-full appearance-none h-2 bg-lotto-gray -top-0.5">
+                <input 
+                  ref="velocityRange" 
+                  v-on:input="handleChange" 
+                  type="range" 
+                  min="1" 
+                  max="1000" 
+                  :value="modelValue" 
+                  class="absolute slider w-full appearance-none h-2 bg-lotto-gray -top-0.5"
+                >
             </div>
         </div>
     </div>
@@ -11,8 +19,11 @@
 
 <script setup>
 import {ref} from 'vue';
+
+const emits = defineEmits(['update:modelValue']);
+defineProps(['modelValue']);
+
 const velocityRange = ref();
-const velocity = ref(1);
 
 function handleChange(e) {
     let target = e.target
@@ -24,6 +35,8 @@ function handleChange(e) {
     const val = target.value
     
     target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+
+    emits('update:modelValue');
 }
 
 </script>

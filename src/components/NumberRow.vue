@@ -10,17 +10,27 @@
                 v-model="modelValue[index]" 
             />
         </ul>
-        {{ modelValue }}
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 import LottoNumber from './LottoNumber.vue';
+import {store} from '../store.js';
+
+watch(store.my_numbers, async (newNumbers, oldNumbers) => {
+    if (!props.automatic) {
+        if (!newNumbers.includes(0)) {
+            emits('numbersUpdated');
+        }
+    }
+});
 
 const props = defineProps({
   title: String,
   automatic: Boolean,
   modelValue: Array
 })
+
+const emits = defineEmits(['numbersUpdated']);
 </script>
