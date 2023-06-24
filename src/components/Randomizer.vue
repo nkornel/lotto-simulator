@@ -4,8 +4,9 @@
         
         <div class="flex">
             <input 
-            type="checkbox" 
-            :value="n" 
+            type="checkbox"
+            :value="modelValue"
+            @change="checkboxToggle"
             class="
                 relative 
                 appearance-none
@@ -21,7 +22,7 @@
             <svg
                 class="
                     absolute 
-                    w-8 h-6 mt-1.5
+                    w-6 md:w-8 h-5 md:h-6 mt-1.5
                     hidden peer-checked:block
                     pointer-events-none
                 "
@@ -40,4 +41,10 @@
 </template>
 
 <script setup>
+defineProps(['modelValue'])
+const emit = defineEmits(['update:modelValue']);
+
+function checkboxToggle(ev) {
+    emit('update:modelValue', ev.target.checked);
+}
 </script>
