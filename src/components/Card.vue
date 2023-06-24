@@ -8,7 +8,7 @@
 
         <NumberRow title="Winning numbers:" :automatic="true" v-model="store.winning_numbers"/>
 
-        <NumberRow title="My numbers:" v-model="store.my_numbers" @numbers-updated="setMyNumbers" />
+        <NumberRow title="My numbers:" v-model="store.my_numbers" />
 
         <Randomizer @toggled="toggleMyNumbers" />
 
@@ -22,7 +22,7 @@ import NumberRow from './NumberRow.vue';
 import ResultCard from './ResultCard.vue';
 import Randomizer from './Randomizer.vue';
 import VelocityRow from './VelocityRow.vue';
-import {computed, onMounted, ref, watch} from 'vue';
+import {computed, onMounted, ref, watch, watchEffect} from 'vue';
 import {store} from '../store.js';
 
 const drawTime = computed(() => {
@@ -51,8 +51,8 @@ watch(drawTime, async (newValue, oldValue) => {
 /**
  * Watches the my numbers array, so we can start updating the spending numbers
  */
-watch(store.my_numbers, async (newValue, oldValue) => {
-    if (!newValue.includes(0)) {
+watchEffect(async () => {
+    if (!store.my_numbers.includes(0)) {
         increaseSpend.value = true;
     }
 });
