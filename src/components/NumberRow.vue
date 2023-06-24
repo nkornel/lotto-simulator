@@ -6,7 +6,7 @@
                 v-for="(item, index) in modelValue" 
                 :number-index="index" 
                 :lotto-number="item" 
-                :disabled="automatic" 
+                :disabled="automatic || store.randomizing" 
                 v-model="modelValue[index]" 
             />
         </ul>
@@ -14,17 +14,8 @@
 </template>
 
 <script setup>
-import { watch } from 'vue';
 import LottoNumber from './LottoNumber.vue';
 import {store} from '../store.js';
-
-watch(store.my_numbers, async (newNumbers, oldNumbers) => {
-    if (!props.automatic) {
-        if (!newNumbers.includes(0)) {
-            emits('numbersUpdated');
-        }
-    }
-});
 
 const props = defineProps({
   title: String,

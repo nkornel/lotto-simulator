@@ -8,13 +8,19 @@
                 </tr>
 
                 <tr>
-                    <td class="font-bold text-sm pb-1.5">Years spent:</td>
-                    <td class="font-bold text-sm pb-1.5">{{store.years_spent}}</td>
+                    <td 
+                        class="font-bold pb-1.5"
+                        :class="{'text-3xl text-violet-800':store.matches_5 > 0, 'text-sm':store.matches_5 === 0}"
+                    >Years spent:</td>
+                    <td 
+                        class="font-bold pb-1.5"
+                        :class="{'text-3xl text-center text-violet-800':store.matches_5 > 0, 'text-sm':store.matches_5 === 0}"
+                    >{{Math.floor(store.weeks_spent / 52)}}</td>
                 </tr>
 
                 <tr>
                     <td class="font-bold text-sm">Cost of tickets:</td>
-                    <td class="font-bold text-sm">{{store.tickets_cost}}</td>
+                    <td class="font-bold text-sm">{{Intl.NumberFormat('hu-HU', {style: 'currency', currency: 'HUF'}).format(store.tickets_cost)}}</td>
                 </tr>
             </tbody>
         </table>
@@ -22,5 +28,5 @@
 </template>
 
 <script setup>
-import { store } from '../store.js'
+import { store } from '../store.js';
 </script>

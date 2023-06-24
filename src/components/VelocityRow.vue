@@ -1,6 +1,6 @@
 <template>
     <div class="container flex flex-col">
-        <label class="mb-4">Speed</label>
+        <label class="mb-4 text-sm md:text-base">Speed</label>
         <div class="w-full">
             <div class="h-1 w-full bg-lotto-gray relative">
                 <input 
@@ -25,6 +25,10 @@ defineProps(['modelValue']);
 
 const velocityRange = ref();
 
+/**
+ * Updates the range for the correct value and emits its value for parent.
+ * @param {event} e 
+ */
 function handleChange(e) {
     let target = e.target
     if (e.target.type !== 'range') {
@@ -36,7 +40,7 @@ function handleChange(e) {
     
     target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
 
-    emits('update:modelValue');
+    emits('update:modelValue', val);
 }
 
 </script>
@@ -45,7 +49,6 @@ function handleChange(e) {
 
 input[type="range"] {
   -webkit-appearance: none;
-  margin-right: 15px;
   height: 8px;
   background: transparent;
   border-radius: 8px;
@@ -57,8 +60,8 @@ input[type="range"] {
 /* Input Thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 8px;
-  width: 8px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
   background: #fff;
   cursor: ew-resize;
@@ -68,8 +71,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
-  height: 8px;
-  width: 8px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
   background: #fff;
   cursor: ew-resize;
@@ -79,8 +82,8 @@ input[type="range"]::-moz-range-thumb {
 
 input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
-  height: 8px;
-  width: 8px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
   background: #fff;
   cursor: ew-resize;

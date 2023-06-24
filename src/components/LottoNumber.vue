@@ -5,7 +5,7 @@
             @input="$emit('update:modelValue', verifyEntry($event.target))"
             :value="lottoNumber" 
             class="border border-lotto-green rounded-lg w-6 md:w-8 h-7 md:h-9 flex text-center items-center"
-            :class="{'mr-4': numberIndex !== 5, 'disabled:bg-gray-100': disabled}"
+            :class="{'mr-3 md:mr-4': numberIndex !== 4, 'disabled:bg-gray-100': disabled}"
             :disabled="disabled"
             :autofocus="numberIndex === 0"
         />
@@ -23,6 +23,10 @@ const props = defineProps({
   disabled: Boolean
 })
 
+/**
+ * Validates the number input for valid lottery numbers.
+ * @param {object} target 
+ */
 function verifyEntry(target) {
     let val = target.value;
 

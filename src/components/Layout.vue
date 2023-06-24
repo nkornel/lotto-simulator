@@ -4,7 +4,7 @@ import Header from './Header.vue'
 </script>
 
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto pb-10">
         <Header />
         
         <Card />
