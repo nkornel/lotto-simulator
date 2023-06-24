@@ -15,7 +15,6 @@ const velocityRange = ref();
 const velocity = ref(1);
 
 function handleChange(e) {
-    console.log(velocity);
     let target = e.target
     if (e.target.type !== 'range') {
         target = document.getElementById('range')
