@@ -52,7 +52,7 @@ watch(drawTime, async (newValue, oldValue) => {
  * Watches the my numbers array, so we can start updating the spending numbers
  */
 watchEffect(async () => {
-    if (!store.my_numbers.includes(0)) {
+    if (!store.my_numbers.includes(0) && store.my_numbers.length > 0) {
         increaseSpend.value = true;
     }
 });
